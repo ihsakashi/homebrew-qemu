@@ -17,8 +17,8 @@ class Qemu < Formula
 
       # hvf patch v8
       patch :p1 do
-        url "https://patchwork.kernel.org/series/485309/mbox/"
-        sha256 "b136e2f0cc90fa4443b4334ce951292a21ca4b807a039c93c31050a0e5b384b7"
+        url "https://github.com/ihsakashi/homebrew-qemu/raw/main/Patches/apple-silicion-support-series-v8.patch"
+        sha256 "68f54ff0b8428c9256fa258fbb5ea3564eb84b088372cd6ce5e7a9ed0cb04979"
       end
     end
   
