@@ -20,6 +20,12 @@ class Qemu < Formula
         url "https://github.com/ihsakashi/homebrew-qemu/raw/main/Patches/apple-silicion-support-series-v8.patch"
         sha256 "68f54ff0b8428c9256fa258fbb5ea3564eb84b088372cd6ce5e7a9ed0cb04979"
       end
+
+      # xcode 12.5 version header fix
+      patch do
+        url "https://github.com/akihikodaki/qemu/commit/c1db57c4362f44e50f1411d8dde79d768c2bb999.patch"
+        sha256 "a4c52faaf94535932b3a8638e01408e57563ff541a6fe8658dbe06029a09ea5d"
+      end
     end
   
     #bottle do
