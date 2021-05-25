@@ -18,7 +18,7 @@ class Libvirt < Formula
     patch :p1 do
 			url "https://github.com/ihsakashi/libvirt/commit/0f062221ae23e6ea0ed5e6ba65d47395581cb143.patch"
 			sha256 "1fa95c485e6cd27bd9b6ac1af9f3d1cdd1f7d7e1baa472e35b5fd3c5f940cf13"
-    done
+    end
 
     depends_on "docutils" => :build
     depends_on "meson" => :build
@@ -102,4 +102,4 @@ class Libvirt < Formula
         assert_match version.to_s, output
       end
     end
-  end
+end
