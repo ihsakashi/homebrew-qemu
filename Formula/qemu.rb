@@ -64,6 +64,7 @@ class Qemu < Formula
         --enable-libssh
         --enable-slirp=system
         --enable-vde
+        --enable-lto
         --extra-cflags=-DNCURSES_WIDECHAR=1
         --disable-sdl
         --disable-gtk
