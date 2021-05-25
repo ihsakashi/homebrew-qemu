@@ -12,7 +12,7 @@ class Qemu < Formula
       # utm patch
       patch do
         url "https://github.com/utmapp/UTM/raw/master/patches/qemu-6.0.0.patch"
-        sha256 "3403dd888a24e5538f03f7d0ebdf58c642317856c026b09c3f35ae5042397e20"
+        sha256 "3cc668069bdadde0d390de16e657dd4c0bb30f020ed5f0b55f38fb7ddf9edfec"
       end
 
       # xcode 12.5 version header fix
