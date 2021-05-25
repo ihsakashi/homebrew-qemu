@@ -57,6 +57,7 @@ class Qemu < Formula
         --prefix=#{prefix}
         --cc=#{ENV.cc}
         --host-cc=#{ENV.cc}
+        --disable-debug-info
         --disable-bsd-user
         --disable-guest-agent
         --enable-curses
