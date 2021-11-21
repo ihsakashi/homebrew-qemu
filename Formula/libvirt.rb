@@ -89,7 +89,17 @@ class Libvirt < Formula
         system "meson", "install"
       end
     end
-  
+
+    def post_install
+    # Since macOS doesn't support QEMU security features, we need to disable them:
+      on_macos do
+        qemu_conf = etc/"libvirt/qemu.conf"
+        qemu_conf.append_lines "security_driver = \"none\""
+        qemu_conf.append_lines "dynamic_ownership = 0"
+        qemu_conf.append_lines "remember_owner = 0"
+      end
+    end
+
     service do
       run [opt_sbin/"libvirtd", "-f", etc/"libvirt/libvirtd.conf"]
       keep_alive true
