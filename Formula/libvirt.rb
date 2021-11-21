@@ -5,7 +5,7 @@ class Libvirt < Formula
     sha256 "829cf2b5f574279c40f0446e1168815d3f36b89710560263ca2ce70256f72e8c"
     license all_of: ["LGPL-2.1-or-later", "GPL-2.0-or-later"]
     head "https://github.com/libvirt/libvirt.git", branch: "master"
-  
+
     livecheck do
       url "https://libvirt.org/sources/"
       regex(/href=.*?libvirt[._-]v?(\d+(?:\.\d+)+)\.t/i)
@@ -78,7 +78,7 @@ class Libvirt < Formula
           --localstatedir=#{var}
           --mandir=#{man}
           --sysconfdir=#{etc}
-          -Dqemu_datadir=HOMEBREW_PREFIX/share
+          -Dqemu_datadir=HOMEBREW_PREFIX/"share/qemu"
           -Ddriver_esx=enabled
           -Ddriver_qemu=enabled
           -Ddriver_network=enabled
