@@ -78,7 +78,7 @@ class Libvirt < Formula
           --localstatedir=#{var}
           --mandir=#{man}
           --sysconfdir=#{etc}
-          -Dqemu_datadir=HOMEBREW_PREFIX/"share/qemu"
+          -Dqemu_datadir=#{HOMEBREW_PREFIX}/share/qemu
           -Ddriver_esx=enabled
           -Ddriver_qemu=enabled
           -Ddriver_network=enabled
