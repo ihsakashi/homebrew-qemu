@@ -45,74 +45,74 @@ class Libvirt < Formula
     sha256 "6a17eaaab58b7d922f174a4a67b2ebb7b981838e6728abf24741483c215e4da0"
   end
   
-    depends_on "docutils" => :build
-    depends_on "meson" => :build
-    depends_on "ninja" => :build
-    depends_on "perl" => :build
-    depends_on "pkg-config" => :build
-    depends_on "python@3.9" => :build
-    depends_on "gettext"
-    depends_on "glib"
-    depends_on "gnu-sed"
-    depends_on "gnutls"
-    depends_on "grep"
-    depends_on "libgcrypt"
-    depends_on "libiscsi"
-    depends_on "libssh2"
-    depends_on "yajl"
-  
-    uses_from_macos "curl"
-    uses_from_macos "libxslt"
-  
-    on_macos do
-      depends_on "rpcgen" => :build
-    end
-  
-    on_linux do
-      depends_on "libtirpc"
-    end
-  
-    def install
-      mkdir "build" do
-        args = %W[
-          --localstatedir=#{var}
-          --mandir=#{man}
-          --sysconfdir=#{etc}
-          -Dqemu_datadir=#{HOMEBREW_PREFIX}/share/qemu
-          -Ddriver_esx=enabled
-          -Ddriver_qemu=enabled
-          -Ddriver_network=enabled
-          -Dinit_script=none
-        ]
-        system "meson", *std_meson_args, *args, ".."
-        system "meson", "compile"
-        system "meson", "install"
-      end
-    end
+  depends_on "docutils" => :build
+  depends_on "meson" => :build
+  depends_on "ninja" => :build
+  depends_on "perl" => :build
+  depends_on "pkg-config" => :build
+  depends_on "python@3.9" => :build
+  depends_on "gettext"
+  depends_on "glib"
+  depends_on "gnu-sed"
+  depends_on "gnutls"
+  depends_on "grep"
+  depends_on "libgcrypt"
+  depends_on "libiscsi"
+  depends_on "libssh2"
+  depends_on "yajl"
 
-    def post_install
-    # Since macOS doesn't support QEMU security features, we need to disable them:
-      on_macos do
-        qemu_conf = etc/"libvirt/qemu.conf"
-        qemu_conf.append_lines "security_driver = \"none\""
-        qemu_conf.append_lines "dynamic_ownership = 0"
-        qemu_conf.append_lines "remember_owner = 0"
-      end
-    end
+  uses_from_macos "curl"
+  uses_from_macos "libxslt"
 
-    service do
-      run [opt_sbin/"libvirtd", "-f", etc/"libvirt/libvirtd.conf"]
-      keep_alive true
-      environment_variables PATH: HOMEBREW_PREFIX/"bin"
-    end
-  
-    test do
-      if build.head?
-        output = shell_output("#{bin}/virsh -V")
-        assert_match "Compiled with support for:", output
-      else
-        output = shell_output("#{bin}/virsh -v")
-        assert_match version.to_s, output
-      end
+  on_macos do
+    depends_on "rpcgen" => :build
+  end
+
+  on_linux do
+    depends_on "libtirpc"
+  end
+
+  def install
+    mkdir "build" do
+      args = %W[
+        --localstatedir=#{var}
+        --mandir=#{man}
+        --sysconfdir=#{etc}
+        -Dqemu_datadir=#{HOMEBREW_PREFIX}/share/qemu
+        -Ddriver_esx=enabled
+        -Ddriver_qemu=enabled
+        -Ddriver_network=enabled
+        -Dinit_script=none
+      ]
+      system "meson", *std_meson_args, *args, ".."
+      system "meson", "compile"
+      system "meson", "install"
     end
   end
+
+  def post_install
+  # Since macOS doesn't support QEMU security features, we need to disable them:
+    on_macos do
+      qemu_conf = etc/"libvirt/qemu.conf"
+      qemu_conf.append_lines "security_driver = \"none\""
+      qemu_conf.append_lines "dynamic_ownership = 0"
+      qemu_conf.append_lines "remember_owner = 0"
+    end
+  end
+
+  service do
+    run [opt_sbin/"libvirtd", "-f", etc/"libvirt/libvirtd.conf"]
+    keep_alive true
+    environment_variables PATH: HOMEBREW_PREFIX/"bin"
+  end
+
+  test do
+    if build.head?
+      output = shell_output("#{bin}/virsh -V")
+      assert_match "Compiled with support for:", output
+    else
+      output = shell_output("#{bin}/virsh -v")
+      assert_match version.to_s, output
+    end
+  end
+end
