@@ -1,28 +1,28 @@
 class Libvirt < Formula
-    desc "C virtualization API"
-    homepage "https://www.libvirt.org"
-    url "https://libvirt.org/sources/libvirt-7.9.0.tar.xz"
-    sha256 "829cf2b5f574279c40f0446e1168815d3f36b89710560263ca2ce70256f72e8c"
-    license all_of: ["LGPL-2.1-or-later", "GPL-2.0-or-later"]
-    head "https://github.com/libvirt/libvirt.git", branch: "master"
+  desc "C virtualization API"
+  homepage "https://www.libvirt.org"
+  url "https://libvirt.org/sources/libvirt-7.9.0.tar.xz"
+  sha256 "829cf2b5f574279c40f0446e1168815d3f36b89710560263ca2ce70256f72e8c"
+  license all_of: ["LGPL-2.1-or-later", "GPL-2.0-or-later"]
+  head "https://github.com/libvirt/libvirt.git", branch: "master"
 
-    livecheck do
-      url "https://libvirt.org/sources/"
-      regex(/href=.*?libvirt[._-]v?(\d+(?:\.\d+)+)\.t/i)
-    end
-  
-    # apple silicon detection
-    patch :p1 do
-        url "https://github.com/ihsakashi/libvirt/commit/0f062221ae23e6ea0ed5e6ba65d47395581cb143.patch"
-        sha256 "1fa95c485e6cd27bd9b6ac1af9f3d1cdd1f7d7e1baa472e35b5fd3c5f940cf13"
-    end
+  livecheck do
+    url "https://libvirt.org/sources/"
+    regex(/href=.*?libvirt[._-]v?(\d+(?:\.\d+)+)\.t/i)
+  end
+
+  # apple silicon detection
+  patch :p1 do
+      url "https://github.com/ihsakashi/libvirt/commit/0f062221ae23e6ea0ed5e6ba65d47395581cb143.patch"
+      sha256 "1fa95c485e6cd27bd9b6ac1af9f3d1cdd1f7d7e1baa472e35b5fd3c5f940cf13"
+  end
 
 
-    # [libvirt PATCH 0/5] meson: Introduce qemu_datadir option - https://listman.redhat.com/archives/libvir-list/2021-November/msg00425.html
-    # [libvirt PATCH 1/5] meson: Define qemu_moddir correctly - https://listman.redhat.com/archives/libvir-list/2021-November/msg00426.html
-    patch :p1 do
-      url "https://github.com/libvirt/libvirt/commit/591cb9d0d5e40eeff60cb18845197508b2878940.patch"
-      sha256 "ef24eb83a328e391bb44684e9664b3c4083b9c60864a78c22b7c0ea5268926f6"
+  # [libvirt PATCH 0/5] meson: Introduce qemu_datadir option - https://listman.redhat.com/archives/libvir-list/2021-November/msg00425.html
+  # [libvirt PATCH 1/5] meson: Define qemu_moddir correctly - https://listman.redhat.com/archives/libvir-list/2021-November/msg00426.html
+  patch :p1 do
+    url "https://github.com/libvirt/libvirt/commit/591cb9d0d5e40eeff60cb18845197508b2878940.patch"
+    sha256 "ef24eb83a328e391bb44684e9664b3c4083b9c60864a78c22b7c0ea5268926f6"
   end
   # [libvirt PATCH 2/5] qemu: Set QEMU data location correctly - https://listman.redhat.com/archives/libvir-list/2021-November/msg00427.html
   patch :p1 do
